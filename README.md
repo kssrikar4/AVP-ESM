@@ -56,6 +56,8 @@ The model was trained on a curated dataset of protein sequences from various sou
       * **VirulentPred 2.0**
       * **InterPro**
 
+![Placeholder for Sequence Length](.plots/sequence_length_distribution.png)
+
 ### Training Procedure
 
 The model is fine-tuned using a multi-iteration **active learning approach** to improve its performance by focusing on the most challenging examples.
