@@ -86,6 +86,7 @@ This report reflects the model's performance on a validation set. This data was 
 
 * **Intermediate Evaluation Confusion Matrix:**
 ![Placeholder for Confusion Matrix](.plots/8m-validation.png)
+
 _A detailed breakdown of correct and incorrect predictions on the validaion set._
 
 #### Final Evaluation on Held-out Test Set
@@ -104,6 +105,7 @@ This report presents the model's final, unbiased performance on data it has neve
 
 * **Final Test Accuracy Confusion Matrix:**
 ![Placeholder for Confusion Matrix](.plots/8m-test.png)
+
 _A detailed breakdown of correct and incorrect predictions on the test set._
 
 ## 📊 Evaluation & Performance of 35M model
@@ -121,6 +123,7 @@ This report reflects the model's performance on a validation set. This data was 
 
 * **Intermediate Evaluation Confusion Matrix:**
 ![Placeholder for Confusion Matrix](.plots/35m-validation.png)
+
 _A detailed breakdown of correct and incorrect predictions on the validaion set._
 
 #### Final Evaluation on Held-out Test Set
@@ -139,6 +142,7 @@ This report presents the model's final, unbiased performance on data it has neve
 
 * **Final Test Accuracy Confusion Matrix:**
 ![Placeholder for Confusion Matrix](.plots/35m-test.png)
+
 _A detailed breakdown of correct and incorrect predictions on the test set._
 
 ## 📈 Visualizations
@@ -155,14 +159,17 @@ The following plots provide further insight into the model's training process an
 
 * **Active Learning Performance:**
 ![Placeholder for Active Learning Performance Plot](.plots/8m-alp.png)
+
 _This plot shows the model's accuracy improvement over successive active learning iterations._
 
 * **CLS Embeddings Visualization (t-SNE):**
 ![Placeholder for CLS Embeddings Visualization](.plots/8m-tsne.png)
+
 _This plot shows the separability of the positive and negative classes in a reduced-dimension space using t-SNE._
 
 * **CLS Embeddings Visualization (UMAP):**
 ![Placeholder for CLS Embeddings Visualization](.plots/8m-umap.png)
+
 _This plot shows the separability of the positive and negative classes in a reduced-dimension space using UMAP._
 
 ## Visualizations of 35m model
@@ -171,14 +178,17 @@ The following visualizations provide further insight into the model's training p
 
 * **Active Learning Performance:**
 ![Placeholder for Active Learning Performance Plot](.plots/35m-alp.png)
+
 _This plot shows the model's accuracy improvement over successive active learning iterations._
 
 * **CLS Embeddings Visualization (t-SNE):**
 ![Placeholder for CLS Embeddings Visualization](.plots/35m-tsne.png)
+
 _This plot shows the separability of the positive and negative classes in a reduced-dimension space using t-SNE._
 
 * **CLS Embeddings Visualization (UMAP):**
 ![Placeholder for CLS Embeddings Visualization](.plots/35m-umap.png)
+
 _This plot shows the separability of the positive and negative classes in a reduced-dimension space using UMAP._
 
 ## Acknowledgements
