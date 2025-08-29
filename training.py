@@ -17,6 +17,7 @@ from tqdm import tqdm
 from tqdm.autonotebook import tqdm as notebook_tqdm
 from Bio.Align import substitution_matrices
 from torch.nn.functional import softmax
+
 def set_seed(seed=42):
     random.seed(seed)
     np.random.seed(seed)
@@ -122,13 +123,6 @@ def train(model, optimizer, scheduler, dataloader, epochs):
             optimizer.step()
             scheduler.step()
         print(f"Epoch {epoch+1}/{epochs} completed, Loss: {loss.item():.4f}")
-import os
-import torch
-from transformers import EsmForSequenceClassification, get_cosine_schedule_with_warmup
-from torch.optim import AdamW
-from torch.utils.data import DataLoader, Subset
-from tqdm.autonotebook import tqdm as notebook_tqdm
-import numpy as np
 def save(filepath, model, optimizer, scheduler, labeled_indices, unlabeled_indices, iteration, history):
     checkpoint = {
         'model_state_dict': model.state_dict(),
@@ -232,7 +226,6 @@ plt.title('Final Confusion Matrix on Test Set')
 plt.xlabel('Predicted Label')
 plt.ylabel('True Label')
 plt.show()
-from scipy.special import softmax
 all_logits, y_true, y_pred, y_conf = [], [], [], []
 model.eval()
 with torch.no_grad():
@@ -287,5 +280,5 @@ plt.grid(True)
 plt.colorbar(label="Label")
 plt.show()
 
-# Note: The same code is used to train the 35m model, but the batch size is decreased to accommodate its larger memory footprint.
+# Note: The same code is used to train the 35m and 150m models, but the batch size and query_size are decreased to accommodate its larger memory footprint and save training time.
 

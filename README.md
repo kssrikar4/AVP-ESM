@@ -4,6 +4,8 @@
 [![Meta](https://img.shields.io/badge/Meta-0078D4?style=for-the-badge&logo=meta&logoColor=white)](https://ai.meta.com/research/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io)
 
+![Placeholder for Web interface](.plots/app.png)
+
 This repository contains the code used for training the protein virulence classification model and a web interface that can be used for making predictions. The project fine-tuned a ESM-2 protein language model to predict whether a protein sequence is a virulence factor or not.
 
 ## 📁 Repository Structure
@@ -145,6 +147,44 @@ This report presents the model's final, unbiased performance on data it has neve
 
 _A detailed breakdown of correct and incorrect predictions on the test set._
 
+## 📊 Evaluation & Performance of 150M model
+
+#### Intermediate Evaluation on Validation Set
+This report reflects the model's performance on a validation set. This data was used during the training loop to monitor progress and guide the active learning strategy, allowing the model to focus on the most uncertain examples. The perfect scores indicate strong performance on the data it was exposed to during the retraining process.
+
+| Class | Precision | Recall | F1-Score | Support |
+| :--- | :--- | :--- | :--- | :--- |
+| Non-Virulent | 1.00 | 1.00 | 1.00 | 2554 |
+| Virulent | 1.00 | 1.00 | 1.00 | 2545 |
+| **Accuracy** | **-** | **-** | **1.00** | **5099** |
+| **Macro Avg** | **1.00** | **1.00** | **1.00** | **5099** |
+| **Weighted Avg** | **1.00** | **1.00** | **1.00** | **5099** |
+
+* **Intermediate Evaluation Confusion Matrix:**
+![Placeholder for Confusion Matrix](.plots/150m-validation.png)
+
+_A detailed breakdown of correct and incorrect predictions on the validaion set._
+
+#### Final Evaluation on Held-out Test Set
+This report presents the model's final, unbiased performance on data it has never seen. These metrics are the most reliable indicators of the model's performance on new, unseen protein sequences.
+
+* **Final Test Accuracy:** 0.9600
+* **Final Test F1 Score (Macro):** 0.9600
+
+| Class | Precision | Recall | F1-Score | Support |
+| :--- | :--- | :--- | :--- | :--- |
+| Negative | 0.97 | 0.95 | 0.96 | 6491 |
+| Positive | 0.95 | 0.97 | 0.96 | 6492 |
+| **Accuracy** | **-** | **-** | **0.96** | **12983** |
+| **Macro Avg** | **0.96** | **0.96** | **0.96** | **12983** |
+| **Weighted Avg** | **0.96** | **0.96** | **0.96** | **12983** |
+
+* **Final Test Accuracy Confusion Matrix:**
+![Placeholder for Confusion Matrix](.plots/150m-test.png)
+
+_A detailed breakdown of correct and incorrect predictions on the test set._
+
+
 ## 📈 Visualizations
 
 | Plot | Description |
@@ -188,6 +228,25 @@ _This plot shows the separability of the positive and negative classes in a redu
 
 * **CLS Embeddings Visualization (UMAP):**
 ![Placeholder for CLS Embeddings Visualization](.plots/35m-umap.png)
+
+_This plot shows the separability of the positive and negative classes in a reduced-dimension space using UMAP._
+
+## Visualizations of 150m model
+
+The following plots provide further insight into the model's training process and performance.
+
+* **Active Learning Performance:**
+![Placeholder for Active Learning Performance Plot](.plots/150m-alp.png)
+
+_This plot shows the model's accuracy improvement over successive active learning iterations._
+
+* **CLS Embeddings Visualization (t-SNE):**
+![Placeholder for CLS Embeddings Visualization](.plots/150m-tsne.png)
+
+_This plot shows the separability of the positive and negative classes in a reduced-dimension space using t-SNE._
+
+* **CLS Embeddings Visualization (UMAP):**
+![Placeholder for CLS Embeddings Visualization](.plots/150m-umap.png)
 
 _This plot shows the separability of the positive and negative classes in a reduced-dimension space using UMAP._
 
