@@ -25,9 +25,9 @@ def get_model_and_tokenizer(model_id):
     return tokenizer, model
 
 model_options = {
-    "ESM-2 (8M)": "kssrikar4/AVP-ESM2-8m",
+    "ESM-2 (150M)": "kssrikar4/AVP-ESM2-150m",
     "ESM-2 (35M)": "kssrikar4/AVP-ESM2-35m",
-    "ESM-2 (150M)": "kssrikar4/AVP-ESM2-150m"
+    "ESM-2 (8M)": "kssrikar4/AVP-ESM2-8m"
 }
 selected_model_name = st.selectbox(
     "Select a model for prediction:",
@@ -35,15 +35,15 @@ selected_model_name = st.selectbox(
 )
 selected_model_id = model_options[selected_model_name]
 
-tab1, tab2 = st.tabs(["Single Sequence", "Upload FASTA File"])
+tab1, tab2 = st.tabs(["Paste FASTA Sequence", "Upload FASTA File"])
 
 with tab1:
     st.header("Predict Single Protein Virulence")
-    st.markdown("Enter or paste a single protein sequence (in single-letter amino acid code) below.")
+    st.markdown("Paste a single protein sequence in FASTA format below. It must start with '>' followed by a name.")
     sequence_input = st.text_area(
-        "Protein Sequence",
+        "FASTA Format Sequence",
         height=200,
-        placeholder="e.g., MSVTVSETRK..."
+        placeholder=">Protein_ID\nMSVTVSETRK..."
     )
     predict_button_single = st.button("Classify", use_container_width=True, type="primary", key="single_predict")
 
@@ -67,14 +67,24 @@ if (predict_button_single and sequence_input) or (predict_button_fasta and uploa
 
     sequences_to_predict = []
     if predict_button_single and sequence_input:
-        sequences_to_predict.append({"id": "User_Input_Sequence", "seq": sequence_input.strip()})
+        fasta_io = io.StringIO(sequence_input.strip())
+        try:
+            for record in SeqIO.parse(fasta_io, "fasta"):
+                sequences_to_predict.append({"id": record.id, "seq": str(record.seq)})
+            if not sequences_to_predict:
+                st.error("Invalid FASTA format. Please ensure the sequence starts with '>' followed by a name.")
+        except Exception as e:
+            st.error(f"Error parsing FASTA sequence: {e}")
     elif predict_button_fasta and uploaded_file:
         fasta_string = uploaded_file.getvalue().decode("utf-8")
         fasta_io = io.StringIO(fasta_string)
         for record in SeqIO.parse(fasta_io, "fasta"):
             sequences_to_predict.append({"id": record.id, "seq": str(record.seq)})
+        if not sequences_to_predict:
+            st.error("The uploaded file does not contain any valid FASTA sequences.")
 
     if sequences_to_predict:
+        st.info(f"Found {len(sequences_to_predict)} sequence(s) to classify.")
         with st.spinner("Classifying sequence(s)..."):
             try:
                 seqs = [item['seq'] for item in sequences_to_predict]
@@ -135,16 +145,8 @@ if (predict_button_single and sequence_input) or (predict_button_fasta and uploa
             
             if results_df is not None:
                 st.subheader("Prediction Results")
-                if len(results_df) == 1:
-                    result = results_df.iloc[0]
-                    if result['Prediction'] == "Virulent Protein":
-                        st.markdown(f"**This is likely a:** <span style='color:red; font-size: 20px;'>**{result['Prediction']}**</span>", unsafe_allow_html=True)
-                    else:
-                        st.markdown(f"**This is likely a:** <span style='color:green; font-size: 20px;'>**{result['Prediction']}**</span>", unsafe_allow_html=True)
-                    st.write(f"**Confidence Score:** {result['Confidence']}")
-                else:
-                    st.dataframe(results_df)
-
+                st.dataframe(results_df, use_container_width=True)
+                
 st.markdown("---")
 with st.expander("Learn more about this model and its training", expanded=False):
     st.header("About the Model")
