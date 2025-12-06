@@ -8,13 +8,13 @@
 
 This repository contains the code used for training the protein virulence classification model and a web interface that can be used for making predictions. The project fine-tuned a ESM-2 protein language model to predict whether a protein sequence is a virulence factor or not.
 
-## 📁 Repository Structure
+## Repository Structure
 
   * `app.py`: The Streamlit web interface code for making predictions.
   * `training.py`: The Python script used for training the ESM-2 model with an active learning approach.
   * `.plots/`: Directory containing all the generated plots.
 
-## 🚀 Web Interface
+## Web Interface
 
 The `app.py` script provides a user-friendly web interface built with **Streamlit** that allows you to paste a protein sequence and get a real-time prediction. It uses the fine-tuned models hosted on Hugging Face: `kssrikar4/AVP-ESM2-8m` and `kssrikar4/AVP-ESM2-35m`.
 
@@ -36,9 +36,9 @@ The `app.py` script provides a user-friendly web interface built with **Streamli
     streamlit run app.py
     ```
     
-## 🧠 Model Details
+## Model Details
 
-The core of this project is a fine-tuned `facebook/esm2_t6_8m_ur50d` protein language model. It's designed for the binary classification of protein sequences, distinguishing between virulence factors and non-virulence factors.
+The core of this project is a fine-tuned `ESM-2` protein language model. It's designed for the binary classification of protein sequences, distinguishing between virulence factors and non-virulence factors.
 
 **Intended Use:** The primary purpose of this model is to assist in bioinformatics research, drug discovery, and pathogen analysis. It is **not intended for clinical diagnostic purposes**.
 
@@ -71,7 +71,7 @@ The model is fine-tuned using a multi-iteration **active learning approach** to 
 3.  **Uncertainty Sampling:** The most uncertain samples were identified using a **Least Confidence querying strategy**.
 4.  **Re-labeling and Retraining:** These newly selected samples were added to the labeled training set, and the model was retrained on the expanded dataset.
 
-## 📊 Evaluation & Performance of 8M model
+## Evaluation & Performance of 8M model
 
 The model's performance was evaluated on a held-out test set to provide an unbiased measure of its effectiveness.
 
@@ -80,11 +80,11 @@ This report reflects the model's performance on a validation set. This data was 
 
 | Class | Precision | Recall | F1-Score | Support |
 | :--- | :--- | :--- | :--- | :--- |
-| Non-Virulent | 1.00 | 1.00 | 1.00 | 2458 |
-| Virulent | 1.00 | 1.00 | 1.00 | 2642 |
-| **Accuracy** | **-** | **-** | **1.00** | **5100** |
-| **Macro Avg** | **1.00** | **1.00** | **1.00** | **5100** |
-| **Weighted Avg** | **1.00** | **1.00** | **1.00** | **5100** |
+| Non-Virulent | 0.99 | 0.99 | 0.99 | 2479 |
+| Virulent | 0.99 | 1.00 | 0.99 | 2620 |
+| **Accuracy** | **-** | **-** | **0.99** | **5099** |
+| **Macro Avg** | **0.99** | **0.99** | **0.99** | **5099** |
+| **Weighted Avg** | **0.99** | **0.99** | **0.99** | **5099** |
 
 * **Intermediate Evaluation Confusion Matrix:**
 ![Placeholder for Confusion Matrix](.plots/8m-validation.png)
@@ -94,13 +94,13 @@ _A detailed breakdown of correct and incorrect predictions on the validaion set.
 #### Final Evaluation on Held-out Test Set
 This report presents the model's final, unbiased performance on data it has never seen. These metrics are the most reliable indicators of the model's performance on new, unseen protein sequences.
 
-* **Final Test Accuracy:** 0.9507
-* **Final Test F1 Score (Macro):** 0.9507
+* **Final Test Accuracy:** 0.9534
+* **Final Test F1 Score (Macro):** 0.9534
 
 | Class | Precision | Recall | F1-Score | Support |
 | :--- | :--- | :--- | :--- | :--- |
-| Negative | 0.97 | 0.93 | 0.95 | 6492 |
-| Positive | 0.94 | 0.97 | 0.95 | 6491 |
+| Negative | 0.96 | 0.95 | 0.95 | 6492 |
+| Positive | 0.95 | 0.96 | 0.95 | 6491 |
 | **Accuracy** | **-** | **-** | **0.95** | **12983** |
 | **Macro Avg** | **0.95** | **0.95** | **0.95** | **12983** |
 | **Weighted Avg** | **0.95** | **0.95** | **0.95** | **12983** |
@@ -110,18 +110,18 @@ This report presents the model's final, unbiased performance on data it has neve
 
 _A detailed breakdown of correct and incorrect predictions on the test set._
 
-## 📊 Evaluation & Performance of 35M model
+## Evaluation & Performance of 35M model
 
 #### Intermediate Evaluation on Validation Set
 This report reflects the model's performance on a validation set. This data was used during the training loop to monitor progress and guide the active learning strategy, allowing the model to focus on the most uncertain examples. The perfect scores indicate strong performance on the data it was exposed to during the retraining process.
 
 | Class | Precision | Recall | F1-Score | Support |
 | :--- | :--- | :--- | :--- | :--- |
-| Non-Virulent | 1.00 | 1.00 | 1.00 | 2195 |
-| Virulent | 1.00 | 1.00 | 1.00 | 2405 |
-| **Accuracy** | **-** | **-** | **1.00** | **4600** |
-| **Macro Avg** | **1.00** | **1.00** | **1.00** | **4600** |
-| **Weighted Avg** | **1.00** | **1.00** | **1.00** | **4600** |
+| Non-Virulent | 1.00 | 1.00 | 1.00 | 2451 |
+| Virulent | 1.00 | 1.00 | 1.00 | 2648 |
+| **Accuracy** | **-** | **-** | **1.00** | **5099** |
+| **Macro Avg** | **1.00** | **1.00** | **1.00** | **5099** |
+| **Weighted Avg** | **1.00** | **1.00** | **1.00** | **5099** |
 
 * **Intermediate Evaluation Confusion Matrix:**
 ![Placeholder for Confusion Matrix](.plots/35m-validation.png)
@@ -131,13 +131,13 @@ _A detailed breakdown of correct and incorrect predictions on the validaion set.
 #### Final Evaluation on Held-out Test Set
 This report presents the model's final, unbiased performance on data it has never seen. These metrics are the most reliable indicators of the model's performance on new, unseen protein sequences.
 
-* **Final Test Accuracy:** 0.9621
-* **Final Test F1 Score (Macro):** 0.9621
+* **Final Test Accuracy:** 0.9570
+* **Final Test F1 Score (Macro):** 0.9570
 
 | Class | Precision | Recall | F1-Score | Support |
 | :--- | :--- | :--- | :--- | :--- |
-| Negative | 0.96 | 0.96 | 0.96 | 6491 |
-| Positive | 0.96 | 0.96 | 0.96 | 6492 |
+| Negative | 0.96 | 0.95 | 0.96 | 6491 |
+| Positive | 0.96 | 0.97 | 0.96 | 6492 |
 | **Accuracy** | **-** | **-** | **0.96** | **12983** |
 | **Macro Avg** | **0.96** | **0.96** | **0.96** | **12983** |
 | **Weighted Avg** | **0.96** | **0.96** | **0.96** | **12983** |
@@ -147,15 +147,15 @@ This report presents the model's final, unbiased performance on data it has neve
 
 _A detailed breakdown of correct and incorrect predictions on the test set._
 
-## 📊 Evaluation & Performance of 150M model
+## Evaluation & Performance of 150M model
 
 #### Intermediate Evaluation on Validation Set
 This report reflects the model's performance on a validation set. This data was used during the training loop to monitor progress and guide the active learning strategy, allowing the model to focus on the most uncertain examples. The perfect scores indicate strong performance on the data it was exposed to during the retraining process.
 
 | Class | Precision | Recall | F1-Score | Support |
 | :--- | :--- | :--- | :--- | :--- |
-| Non-Virulent | 1.00 | 1.00 | 1.00 | 2554 |
-| Virulent | 1.00 | 1.00 | 1.00 | 2545 |
+| Non-Virulent | 1.00 | 1.00 | 1.00 | 2625 |
+| Virulent | 1.00 | 1.00 | 1.00 | 2474 |
 | **Accuracy** | **-** | **-** | **1.00** | **5099** |
 | **Macro Avg** | **1.00** | **1.00** | **1.00** | **5099** |
 | **Weighted Avg** | **1.00** | **1.00** | **1.00** | **5099** |
@@ -168,13 +168,13 @@ _A detailed breakdown of correct and incorrect predictions on the validaion set.
 #### Final Evaluation on Held-out Test Set
 This report presents the model's final, unbiased performance on data it has never seen. These metrics are the most reliable indicators of the model's performance on new, unseen protein sequences.
 
-* **Final Test Accuracy:** 0.9600
-* **Final Test F1 Score (Macro):** 0.9600
+* **Final Test Accuracy:** 0.9601
+* **Final Test F1 Score (Macro):** 0.9601
 
 | Class | Precision | Recall | F1-Score | Support |
 | :--- | :--- | :--- | :--- | :--- |
-| Negative | 0.97 | 0.95 | 0.96 | 6491 |
-| Positive | 0.95 | 0.97 | 0.96 | 6492 |
+| Negative | 0.96 | 0.96 | 0.96 | 6491 |
+| Positive | 0.96 | 0.96 | 0.96 | 6492 |
 | **Accuracy** | **-** | **-** | **0.96** | **12983** |
 | **Macro Avg** | **0.96** | **0.96** | **0.96** | **12983** |
 | **Weighted Avg** | **0.96** | **0.96** | **0.96** | **12983** |
@@ -185,7 +185,7 @@ This report presents the model's final, unbiased performance on data it has neve
 _A detailed breakdown of correct and incorrect predictions on the test set._
 
 
-## 📈 Visualizations
+## Visualizations
 
 | Plot | Description |
 | :--- | :--- |
@@ -264,6 +264,6 @@ I would like to express my gratitude to the following organizations and projects
       * [**InterPro**](https://www.ebi.ac.uk/interpro/)
   * **Google Gemini:** For its assistance in generating code.
 
-## 📄 Licensing
+## Licensing
 
 This project is licensed under the **GNU Lesser General Public License v2.1 (LGPL-2.1)**.
