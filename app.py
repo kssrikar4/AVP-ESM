@@ -188,13 +188,13 @@ with st.expander("Learn more about this model and its training", expanded=False)
     st.subheader("Model Evaluation")
     
     st.markdown("### ESM-2 (8M) Model")
-    st.write("Final Test Accuracy:", "0.9507")
-    st.write("Final Test F1 Score (Macro):", "0.9507")
+    st.write("Final Test Accuracy:", "0.9534")
+    st.write("Final Test F1 Score (Macro):", "0.9534")
     
     data_8m = {
         'Class': ['Negative', 'Positive', 'Accuracy', 'Macro Avg', 'Weighted Avg'],
-        'Precision': [0.97, 0.94, np.nan, 0.95, 0.95],
-        'Recall': [0.93, 0.97, np.nan, 0.95, 0.95],
+        'Precision': [0.96, 0.95, np.nan, 0.95, 0.95],
+        'Recall': [0.95, 0.96, np.nan, 0.95, 0.95],
         'F1-Score': [0.95, 0.95, 0.95, 0.95, 0.95],
         'Support': [6492, 6491, 12983, 12983, 12983]
     }
@@ -202,13 +202,13 @@ with st.expander("Learn more about this model and its training", expanded=False)
     st.dataframe(df_8m.set_index('Class'))
 
     st.markdown("### ESM-2 (35M) Model")
-    st.write("Final Test Accuracy:", "0.9621")
-    st.write("Final Test F1 Score (Macro):", "0.9621")
+    st.write("Final Test Accuracy:", "0.9570")
+    st.write("Final Test F1 Score (Macro):", "0.9570")
 
     data_35m = {
         'Class': ['Negative', 'Positive', 'Accuracy', 'Macro Avg', 'Weighted Avg'],
         'Precision': [0.96, 0.96, np.nan, 0.96, 0.96],
-        'Recall': [0.96, 0.96, np.nan, 0.96, 0.96],
+        'Recall': [0.95, 0.97, np.nan, 0.96, 0.96],
         'F1-Score': [0.96, 0.96, 0.96, 0.96, 0.96],
         'Support': [6491, 6492, 12983, 12983, 12983]
     }
@@ -216,16 +216,18 @@ with st.expander("Learn more about this model and its training", expanded=False)
     st.dataframe(df_35m.set_index('Class'))
     
     st.markdown("### ESM-2 (150M) Model")
-    st.write("Final Test Accuracy:", "0.9600")
-    st.write("Final Test F1 Score (Macro):", "0.9600")
+    st.write("Final Test Accuracy:", "0.9601")
+    st.write("Final Test F1 Score (Macro):", "0.9601")
     
     data_150m = {
         'Class': ['Negative', 'Positive', 'Accuracy', 'Macro Avg', 'Weighted Avg'],
-        'Precision': [0.97, 0.97, np.nan, 0.96, 0.96],
-        'Recall': [0.95, 0.97, np.nan, 0.96, 0.96],
+        'Precision': [0.96, 0.96, np.nan, 0.96, 0.96],
+        'Recall': [0.96, 0.96, np.nan, 0.96, 0.96],
         'F1-Score': [0.96, 0.96, 0.96, 0.96, 0.96],
         'Support': [6491, 6492, 12983, 12983, 12983]
     }
     df_150m = pd.DataFrame(data_150m)
     st.dataframe(df_150m.set_index('Class'))
 
+
+}
